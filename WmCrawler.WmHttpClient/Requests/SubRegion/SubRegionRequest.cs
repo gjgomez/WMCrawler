@@ -8,7 +8,7 @@ namespace WmCrawler.WmHttpClient.Requests.SubRegion
         [Required]
         public string Slug { get; set; }
 
-        public override string Endpoint => "/regions";
+        public override string Endpoint => "/v1/regions";
 
         internal override string PathAndQuery => $"{Endpoint}/{Slug}/subregions";
 
