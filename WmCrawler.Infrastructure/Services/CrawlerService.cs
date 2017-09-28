@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Azure;
 using WmCrawler.Core.Models;
 using WmCrawler.Core.Services;
 using WmCrawler.WmHttpClient;
@@ -20,7 +21,7 @@ namespace WmCrawler.Infrastructure.Services
 
         public async Task<Region> GetStorefrontRegionsAsync()
         {
-            var regionSlug = ConfigurationManager.AppSettings["Crawler:RootRegionSlug"];
+            var regionSlug = CloudConfigurationManager.GetSetting("Crawler:RootRegionSlug");
             var region = new Region(regionSlug);
 
             await SetStorefrontSubRegionsAsync(region);
