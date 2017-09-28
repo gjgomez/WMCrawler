@@ -11,12 +11,15 @@ namespace WmCrawler.WmHttpClient.Responses.Listings
         public class Data
         {
             [JsonProperty("listings")]
-            public ICollection<Listing> Dispensaries { get; set; } = new List<Listing>();
+            public ICollection<Listing> Listings { get; set; } = new List<Listing>();
 
             public class Listing
             {
                 [JsonProperty("slug")]
                 public string Slug { get; set; }
+
+                [JsonProperty("type")]
+                public string Type { get; set; }
 
                 public override string ToString()
                 {

@@ -47,8 +47,10 @@
     <Compile Include="Requests\Getable.cs" />
     <Compile Include="Requests\IRequest.cs" />
     <Compile Include="Requests\Listings\ListingRequest.cs" />
+    <Compile Include="Requests\Menus\MenuRequest.cs" />
     <Compile Include="Requests\SubRegions\SubRegionRequest.cs" />
     <Compile Include="Responses\Listings\ListingResponse.cs" />
+    <Compile Include="Responses\Menus\MenuResponse.cs" />
     <Compile Include="Responses\SubRegion\SubRegionResponse.cs" />
     <Compile Include="WmClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

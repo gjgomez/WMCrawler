@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26906.1
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WmCrawler.WmHttpClient", "WmCrawler.WmHttpClient\WmCrawler.WmHttpClient.csproj", "{C8644C3F-8EED-4C57-B6AB-C2ABDE1B4659}"
 EndProject
@@ -10,6 +10,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WmCrawler.Core", "WmCrawler.Core\WmCrawler.Core.csproj", "{95C12748-D6A1-4C75-8221-AD40D115E668}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WmCrawler.Infrastructure", "WmCrawler.Infrastructure\WmCrawler.Infrastructure.csproj", "{7ADAB852-C4C2-406A-B027-40F961D7BB93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{D881AE75-EA26-4978-85FA-34782EEFF34D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\wm-crawler-db-schema.sql = ..\..\..\Desktop\wm-crawler-db-schema.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

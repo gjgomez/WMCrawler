@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WmCrawler.Core.Models
+﻿namespace WmCrawler.Core.Models
 {
     public class Listing
     {
+        public Listing(string slug, string type)
+        {
+            Slug = slug;
+            Type = type;
+        }
+
         public string Slug { get; set; }
+
+        public string Type { get; set; }
     }
 }

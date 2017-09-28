@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using WmCrawler.Core.Models;
 
@@ -12,5 +9,7 @@ namespace WmCrawler.Core.Services
         Task<Region> GetStorefrontRegionsAsync();
 
         Task<IEnumerable<Listing>> GetListingsOnLeafRegionsAsync(Region region);
+
+        Task<IEnumerable<MenuItem>> GetMenuItems(IEnumerable<Listing> listings);
     }
 }

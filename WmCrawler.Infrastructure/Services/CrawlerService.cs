@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,17 +41,37 @@ namespace WmCrawler.Infrastructure.Services
             }
             else
             {
-                var listingResponse = await _httpClient.GetListingsAsync(region.Slug);
-                listings.AddRange(listingResponse.DataContainer.Dispensaries.Select(dispensary => new Listing { Slug = dispensary.Slug }));
+                listings.AddRange(await _httpClient.GetListingsAsync(region.Slug));
             }
 
             return listings;
         }
 
+        public async Task<IEnumerable<MenuItem>> GetMenuItems(IEnumerable<Listing> listings)
+        {
+            var menuItems = new List<MenuItem>();
+            var sno = 1;
+
+            foreach (var listing in listings)
+            {
+                var items = await _httpClient.GetMenusAsync(listing);
+                foreach (var item in items)
+                {
+                    item.FileFrom = DateTime.UtcNow.Month.ToString();
+                    item.Sno = sno;
+
+                    menuItems.Add(item);
+                    sno++;
+                }
+            }
+
+            return menuItems;
+        }
+
         private async Task SetStorefrontSubRegionsAsync(Region region)
         {
-            var subRegionResponse = await _httpClient.GetSubRegionsAsync(region.Slug);
-            foreach (var subRegion in subRegionResponse.DataContainer.SubRegions)
+            var subRegions = await _httpClient.GetSubRegionsAsync(region.Slug);
+            foreach (var subRegion in subRegions)
             {
                 var curRegion = new Region(subRegion.Slug);
                 region.SubRegions.Add(curRegion);
