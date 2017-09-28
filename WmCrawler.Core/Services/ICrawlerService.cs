@@ -10,5 +10,7 @@ namespace WmCrawler.Core.Services
     public interface ICrawlerService
     {
         Task<Region> GetStorefrontRegionsAsync();
+
+        Task<IEnumerable<Listing>> GetListingsOnLeafRegionsAsync(Region region);
     }
 }

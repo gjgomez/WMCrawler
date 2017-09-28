@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
-using WmCrawler.Console.Services;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using WmCrawler.Core.Models;
+using WmCrawler.Infrastructure.Services;
 
 namespace WmCrawler.Console
 {
@@ -13,7 +15,28 @@ namespace WmCrawler.Console
         private static async Task MainAsync(string[] args)
         {
             var crawlerService = new CrawlerService();
-            var rootRegion = await crawlerService.GetStorefrontRegionsAsync();
+            //var rootRegion = await crawlerService.GetStorefrontRegionsAsync();
+            var rootRegion = new Region("united-states")
+            {
+                SubRegions = new List<Region> {
+                    new Region("minnesota")
+                    {
+                        SubRegions =new List<Region>
+                        {
+                            new Region("st-cloud")
+                        }
+                    },
+                    new Region("wisconsin"),
+                    new Region("illinois")
+                    {
+                        SubRegions =new List<Region>
+                        {
+                            new Region("chicago")
+                        }
+                    }
+                }
+            };
+            var listings = await crawlerService.GetListingsOnLeafRegionsAsync(rootRegion);
         }
     }
 }

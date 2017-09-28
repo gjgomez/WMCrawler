@@ -4,21 +4,21 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WmCrawler.Core.Models;
 using WmCrawler.WmHttpClient.Requests;
-using WmCrawler.WmHttpClient.Requests.SubRegion;
+using WmCrawler.WmHttpClient.Requests.Listings;
+using WmCrawler.WmHttpClient.Requests.SubRegions;
+using WmCrawler.WmHttpClient.Responses.Listings;
 using WmCrawler.WmHttpClient.Responses.SubRegion;
 
 namespace WmCrawler.WmHttpClient
 {
     public sealed class WmClient
     {
-        private HttpClient _client;
+        private readonly HttpClient _client;
 
-        public WmClient(string baseAddress)
+        public WmClient()
         {
             _client = new HttpClient();
-            _client.BaseAddress = new Uri(baseAddress);
         }
 
         private async Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request) where TRequest : Getable
@@ -30,7 +30,7 @@ namespace WmCrawler.WmHttpClient
                 throw new WmValidationException("Request is invalid.  Please check the required fields and try again.", results);
             }
 
-            var requestUri = _client.BaseAddress.PathAndQuery + request.PathAndQuery;
+            var requestUri = request.Endpoint;
 
             using (var responseTask = _client.GetAsync(requestUri))
             {
@@ -50,9 +50,16 @@ namespace WmCrawler.WmHttpClient
 
         public Task<SubRegionResponse> GetSubRegionsAsync(string regionSlug)
         {
-            var request = new SubRegionRequest { Slug = regionSlug };
+            var request = new SubRegionRequest { RegionSlug = regionSlug };
 
             return GetAsync<SubRegionRequest, SubRegionResponse>(request);            
+        }
+
+        public Task<ListingResponse> GetListingsAsync(string regionSlug)
+        {
+            var request = new ListingRequest { RegionSlug = regionSlug };
+
+            return GetAsync<ListingRequest, ListingResponse>(request);
         }
     }
 }

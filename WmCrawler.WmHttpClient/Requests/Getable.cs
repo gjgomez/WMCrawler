@@ -26,9 +26,6 @@ namespace WmCrawler.WmHttpClient.Requests
             }
         }
 
-        [JsonIgnore]
-        internal abstract string PathAndQuery { get; }
-
         private static IEnumerable<KeyValuePair<string, string>> GetQueryString(object value, string startingName = null)
         {
             Dictionary<string, string> values = new Dictionary<string, string>();
